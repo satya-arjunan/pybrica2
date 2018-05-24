@@ -1,40 +1,20 @@
 #include <pybind11/pybind11.h>
-
-int add(int i, int j) {
-    return i + j;
-}
+#include "brica2/core/unit.hpp"
 
 namespace py = pybind11;
 
 PYBIND11_MODULE(pybrica2, m) {
-    m.doc() = R"pbdoc(
-        Pybind11 example plugin
-        -----------------------
-
-        .. currentmodule:: pybrica2
-
-        .. autosummary::
-           :toctree: _generate
-
-           add
-           subtract
-    )pbdoc";
-
-    m.def("add", &add, R"pbdoc(
-        Add two numbers
-
-        Some other explanation about the add function.
-    )pbdoc");
-
-    m.def("subtract", [](int i, int j) { return i - j; }, R"pbdoc(
-        Subtract two numbers
-
-        Some other explanation about the subtract function.
-    )pbdoc");
-
-#ifdef VERSION_INFO
-    m.attr("__version__") = VERSION_INFO;
-#else
-    m.attr("__version__") = "dev";
-#endif
+    py::class_<brica2::core::Unit>(m, "Unit")
+        .def(py::init())
+        .def(py::init<brica2::core::Unit&>())
+        .def("make_in_port", (void (brica2::core::Unit::*)(const std::string&))&brica2::core::Unit::make_in_port)
+        .def("make_out_port", (void (brica2::core::Unit::*)(const std::string&))&brica2::core::Unit::make_out_port);
 }
+
+//PYBIND11_MODULE(pybrica2, m) {
+//    py::class_<brica2::core::Component>(m, "Component")
+//        .def(py::init<const double>(), py::init<const double>())
+//        .def("make_in_port", (void (brica2::core::Component::*)(const std::string&))&brica2::core::Component::make_in_port)
+//        .def("make_out_port", (void (brica2::core::Component::*)(const std::string&))&brica2::core::Component::make_out_port);
+//}
+

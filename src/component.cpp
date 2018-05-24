@@ -23,6 +23,7 @@
  *
  *****************************************************************************/
 
+//#include "pybind11/pybind11.h"
 #include "brica2/core/component.hpp"
 
 #include <cassert>
@@ -138,4 +139,11 @@ void Component::reset()
 }
 }
 
-
+//namespace py = pybind11;
+//
+//pybind11_module(pybrica2, m) {
+//    py::class_<brica2::core::Component>(m, "Component")
+//        .def(py::init<const double>(), py::init<const couble())
+//        .def("make_in_port", &Pet::make_in_port)
+//        .def("make_out_port", &Pet::make_out_port);
+//}

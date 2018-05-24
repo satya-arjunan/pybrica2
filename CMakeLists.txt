@@ -29,9 +29,11 @@ include_directories(external/asio/asio/include)
 
 # Include directories for BriCA2
 include_directories(${PROJECT_SOURCE_DIR}/include)
+include_directories(${PROJECT_SOURCE_DIR}/pybind11/include)
 
-add_subdirectory(pybind11)
-pybind11_add_module(pybrica2 src/main.cpp)
+set(CPP_FILES src/main.cpp src/port.cpp src/unit.cpp src/component.cpp src/scheduler.cpp src/thread_pool.cpp src/virtual_time_sync_scheduler.cpp)
 add_subdirectory(src)
-add_subdirectory(external)
-add_subdirectory(tests)
+add_subdirectory(pybind11)
+#target_link_libraries(brica2-corsfae)
+pybind11_add_module(pybrica2 SHARED ${CPP_FILES})
+

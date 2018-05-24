@@ -4,5 +4,5 @@ Brain-inspired Computing Architecture Version 2
 ## Build
 ```
 cd ..
-pip install ./pybrica2
+pip install --user ./pybrica2
 ```
